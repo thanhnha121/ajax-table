@@ -25,10 +25,11 @@ body {
     }
 
     .at-demo hr {
-        height: 1px;
+        height: 5px;
         border: 0px;
-        background: #ccc;
+        background: #f1f0f0;
     }
+
 .at-wrapper input {
     border: 1px solid #ccc;
     outline: none;
@@ -41,118 +42,145 @@ body {
     border-radius: 2px;
 }
 
-.at-wrapper .at-header {
-    width: calc(100% - 20px);
-    height: 25px;
-    padding: 10px;
-    border-bottom: 1px solid #f1f0f0;
-}
+    .at-wrapper .at-header {
+        width: calc(100% - 20px);
+        height: 25px;
+        padding: 10px;
+        border-bottom: 1px solid #f1f0f0;
+    }
 
-.at-wrapper .at-header .at-view-count {
-    display: inline-block;
-    float: left;
-}
+        .at-wrapper .at-header .at-view-count {
+            display: inline-block;
+            float: left;
+        }
 
-.at-wrapper .at-header .at-view-count input {
-    width: 50px;
-    height: 24px;
-    text-align: center;
-    padding: 0;
-}
+            .at-wrapper .at-header .at-view-count input {
+                width: 50px;
+                height: 24px;
+                text-align: center;
+                padding: 0;
+                border-radius: 2px;
+            }
 
-.at-wrapper .at-header .at-search {
-    display: inline-block;
-    float: right;
-    position: relative;
-}
+        .at-wrapper .at-header .at-search {
+            display: inline-block;
+            float: right;
+            position: relative;
+        }
 
-.at-wrapper .at-header .at-search input {
-    height: 24px;
-    padding: 0 30px 0 10px;
-}
+            .at-wrapper .at-header .at-search input {
+                height: 24px;
+                padding: 0 30px 0 10px;
+                border-radius: 2px;
+            }
 
-.at-wrapper .at-header .at-search img {
-    position: absolute;
-    right: 5px;
-    top: 2px;
-    width: 20px;
-}
+            .at-wrapper .at-header .at-search img {
+                position: absolute;
+                right: 5px;
+                top: 2px;
+                width: 20px;
+            }
 
-.at-wrapper .at-body {
+    .at-wrapper .at-body {
+    }
 
-}
+        .at-wrapper .at-body .at-body-header {
+            padding: 10px;
+            width: calc(100% - 20px);
+            display: inline-block;
+            font-weight: 600;
+            border-bottom: 1px solid #f1f0f0;
+        }
 
-.at-wrapper .at-body .at-body-header {
+            .at-wrapper .at-body .at-body-header > div {
+                float: left;
+                min-width: 150px;
+            }
 
-}
+        .at-wrapper .at-body .at-body-rows {
+            width: 100%;
+        }
 
-.at-wrapper .at-body .at-body-header > div {
+            .at-wrapper .at-body .at-body-rows > .at-row {
+                padding: 10px;
+                display: inline-block;
+                width: calc(100% - 20px);
+                border-bottom: 1px solid #f1f0f0;
+            }
 
-}
+                .at-wrapper .at-body .at-body-rows > .at-row > div {
+                    float: left;
+                    min-width: 150px;
+                }
 
-.at-wrapper .at-body .at-body-rows {
+    .at-wrapper .at-footer {
+        padding: 10px;
+        display: inline-block;
+        width: calc(100% - 20px);
+    }
 
-}
+        .at-wrapper .at-footer .at-footer-left {
+            float: left;
+        }
 
-.at-wrapper .at-body .at-body-rows > div {
+            .at-wrapper .at-footer .at-footer-left > div {
+                float: left;
+            }
 
-}
+            .at-wrapper .at-footer .at-footer-left .at-params {
+                margin: 0 5px;
+                font-weight: 600;
+            }
 
-.at-wrapper .at-footer {
+        .at-wrapper .at-footer .at-footer-right {
+            float: right;
+        }
 
-}
+            .at-wrapper .at-footer .at-footer-right .at-paging-wrapper {
+            }
 
-.at-wrapper .at-footer .at-footer-left {
+                .at-wrapper .at-footer .at-footer-right .at-paging-wrapper .at-page {
+                    float: left;
+                    margin: 0 5px;
+                    border: 1px solid #f1f0f0;
+                    text-align: center;
+                    padding: 10px 12px;
+                    cursor: pointer;
+                }
 
-}
+                    .at-wrapper .at-footer .at-footer-right .at-paging-wrapper .at-page.at-current-page {
+                        background: #f1f0f0;
+                        cursor: default;
+                    }
 
-.at-wrapper .at-footer .at-footer-left .at-params {
+                    .at-wrapper .at-footer .at-footer-right .at-paging-wrapper .at-page.at-first {
+                    }
 
-}
+                    .at-wrapper .at-footer .at-footer-right .at-paging-wrapper .at-page.at-pre {
+                    }
 
-.at-wrapper .at-footer .at-footer-right {
+                    .at-wrapper .at-footer .at-footer-right .at-paging-wrapper .at-page.at-next {
+                    }
 
-}
+                    .at-wrapper .at-footer .at-footer-right .at-paging-wrapper .at-page.at-last {
+                    }
 
-.at-wrapper .at-footer .at-footer-right .at-paging-wrapper {
+    .at-wrapper .at-loading {
+        display: none;
+        position: absolute;
+        top: 45px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        text-align: center;
+        border-bottom-left-radius: 2px;
+        border-bottom-right-radius: 2px;
+        background: rgba(0,0,0,.1);
+        opacity: .3;
+    }
 
-}
-
-.at-wrapper .at-footer .at-footer-right .at-paging-wrapper .at-page {
-
-}
-
-.at-wrapper .at-footer .at-footer-right .at-paging-wrapper .at-page.at-first {
-
-}
-
-.at-wrapper .at-footer .at-footer-right .at-paging-wrapper .at-page.at-pre {
-
-}
-
-.at-wrapper .at-footer .at-footer-right .at-paging-wrapper .at-page.at-next {
-
-}
-
-.at-wrapper .at-footer .at-footer-right .at-paging-wrapper .at-page.at-last {
-
-}
-
-.at-wrapper .at-loading {
-    position: absolute;
-    top: 44px;
-    left: 0;
-    right: 0;
-    bottom: 44px;
-    text-align: center;
-    margin: 1px;
-    border-radius: 2px;
-    background: rgba(0,0,0,.1);
-    opacity: .3;
-}
-
-.at-wrapper .at-loading > img {
-    width: 30px;
-    top: calc(50% - 15px);
-    position: relative;
-}
+        .at-wrapper .at-loading > img {
+            width: 30px;
+            top: calc(50% - 15px);
+            position: relative;
+        }
