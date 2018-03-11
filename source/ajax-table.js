@@ -25,6 +25,7 @@
         // config ajax call
         method          : 'POST',
         dataType        : 'JSON',
+        contentType     : 'application/json',
         headers         : {},
         data            : {},
         url             : 'http://localhost:3100/api/test/example_data'
@@ -61,6 +62,7 @@
         // config ajax call
         method          : 'POST',
         dataType        : 'JSON',
+        contentType     : 'application/json',
         headers         : {},
         data            : {},
         url             : 'http://localhost:3100/api/test/example_data'
@@ -134,12 +136,10 @@ function AT_RenderHeader(selector, config) {
     headerHtml = '<div>Index</div>';
   }
 
-  var id = selector.attr('id') ? selector.attr('id') : '';
-
   for (var i = 0; i <= config.columns.length - 1; i++) {
     if (config.columns[i].sortable) {
-      headerHtml += '<div class="at-sortable" onclick="AT_SortCLick(\'' + id + '\', \'' 
-        + config.columns[i].property + '\')">' 
+      headerHtml += '<div class="at-sortable" onclick="AT_SortCLick(\'' 
+        + config.columns[i].property + '\', event)">' 
         + config.columns[i].title + '<img src=\'assets/sort.svg\'></div>';
     } else {
       headerHtml += '<div>' + config.columns[i].title + '</div>';
@@ -149,15 +149,35 @@ function AT_RenderHeader(selector, config) {
   selector.find('.at-body > .at-body-header').html(headerHtml);
 }
 
-function AT_SortCLick(id, property) {
-  var oldSort = $('#' + id).attr('data-at-sort', property);
-  if (oldSort !== undefined && oldSort !== null && oldSort !== '') {
-    if () {
-      
+function AT_SortCLick(property, e) {
+  setTimeout(() => {
+    var target;
+    if ($(e.target).prop('tagName') === 'IMG') {
+      target = $(e.target).parent('.at-sortable');
+    } else {
+      target = $(e.target);
     }
-  } else {
-
-  }
+    if (target.hasClass('at-sortable')) {
+      if (AT_Config.api.data[AT_Config.api.sortPath] === undefined) {
+        AT_Config.api.data[AT_Config.api.sortPath] = {};
+      }
+      if (AT_Config.api.data[AT_Config.api.sortPath][property] === -1) {
+        AT_Config.api.data[AT_Config.api.sortPath][property] = 0;
+        target.find('img').attr('src', 'assets/sort.svg');
+      } else if (AT_Config.api.data[AT_Config.api.sortPath][property] === 0
+        || AT_Config.api.data[AT_Config.api.sortPath][property] === null 
+        || AT_Config.api.data[AT_Config.api.sortPath][property] === undefined
+        ) {
+        AT_Config.api.data[AT_Config.api.sortPath][property] = 1;
+        target.find('img').attr('src', 'assets/sort-down.svg');
+      } else {
+        AT_Config.api.data[AT_Config.api.sortPath][property] = -1;
+        target.find('img').attr('src', 'assets/sort-up.svg');
+      }
+      console.log(AT_Config);
+      AT_GoToPage(1);
+    }
+  }, 1);
 }
 
 function AT_HandleShowCountEnter(selector) {
@@ -203,35 +223,44 @@ function AT_GoToPage(page, selector, config) {
       data[config.api.searchInputPath] = '';
     }
 
+    if (config.api.contentType === 'application/json') {
+      data = JSON.stringify(data);
+    }
+
     $.ajax({
-      url     : config.api.url,
-      type    : config.api.method,
-      dataType: config.api.dataType,
-      data    : config.api.dataType === 'GET' ? {} : data,
-      headers : config.api.headers,
-      success : (response) => {
-        if (response[config.api.statusPath]) {
+      url         : config.api.url,
+      type        : config.api.method,
+      contentType : config.api.contentType,
+      dataType    : config.api.dataType,
+      data        : config.api.dataType === 'GET' ? {} : data,
+      headers     : config.api.headers,
+      success     : (response) => { onSuccess(response); },
+      error       : (error) => { onError(error); }
+    });
 
-          AT_RenderTableBody(response, page, selector, config);
-          AT_RenderFooter(response, page, selector, config);
-          setTimeout(() => {
-            AT_HideLoading(selector);
-          }, 100);
+    function onSuccess(response) {
+      if (response[config.api.statusPath]) {
 
-        } else {
-          setTimeout(() => {
-            AT_HideLoading(selector);
-          }, 100);
-          console.log('[Ajax Table] Call api error: ', response);
-        }
-      },
-      error   : (error) => {
+        AT_RenderTableBody(response, page, selector, config);
+        AT_RenderFooter(response, page, selector, config);
+        setTimeout(() => {
+          AT_HideLoading(selector);
+        }, 100);
+
+      } else {
         setTimeout(() => {
           AT_HideLoading(selector);
         }, 100);
         console.log('[Ajax Table] Call api error: ', response);
       }
-    });
+    }
+
+    function onError(error) {
+      setTimeout(() => {
+        AT_HideLoading(selector);
+      }, 100);
+      console.log('[Ajax Table] Call api error: ', error);
+    }
   }, 1);
 
 }
