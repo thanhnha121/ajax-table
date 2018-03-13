@@ -267,7 +267,9 @@ function AT_GoToPage(page, selector, config) {
 
 function AT_RenderTableBody(response, page, selector, config) {
   var bodyHtml = '';
-  var viewCount = $('#at-view-count').val().trim();
+  console.log(config);
+  console.log(selector);
+  var viewCount = selector.find('#at-view-count').val().trim();
 
   for (var i = 0; i <= response[config.api.dataPath].length - 1; i++) {
     var tdHtml = '<div class="at-row">';
@@ -286,7 +288,7 @@ function AT_RenderTableBody(response, page, selector, config) {
 }
 
 function AT_RenderFooter(response, page, selector, config) {
-  var viewCount = $('#at-view-count').val().trim();
+  var viewCount = selector.find('#at-view-count').val().trim();
   var footerLeftHtml = '<div>Showing from </div>';
 
   var fromCount = response[config.api.dataPath].length > 0 
