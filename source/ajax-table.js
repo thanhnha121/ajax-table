@@ -267,8 +267,6 @@ function AT_GoToPage(page, selector, config) {
 
 function AT_RenderTableBody(response, page, selector, config) {
   var bodyHtml = '';
-  console.log(config);
-  console.log(selector);
   var viewCount = selector.find('#at-view-count').val().trim();
 
   for (var i = 0; i <= response[config.api.dataPath].length - 1; i++) {
